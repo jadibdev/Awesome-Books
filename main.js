@@ -32,7 +32,8 @@ function addBook(event) {
       <div>
         <h2 >${bookCollection[i].title}</h2>
         <h3>${bookCollection[i].author}</h3>
-        <button id=${i} class="del" type="button">Remove</button>
+        <button type="button" onclick="removeBtn(${i})">Remove</button>
+        <p>${i}</p>
         <hr />
       </div>
     `;
@@ -44,9 +45,8 @@ function addBook(event) {
   document.getElementById('bookAuthor').value = '';
 }
 
-function removeButton() {
-  console.log('book removed');
+function removeBtn(t) {
+  (bookCollection.splice(t, t));
+  console.log(bookCollection);
 }
-
-
 form.addEventListener('submit', addBook);
