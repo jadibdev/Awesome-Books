@@ -5,48 +5,47 @@ class Book {
   }
 }
 
-const booksContainer = document.getElementById('booksContainer');
-const bookCollection = [];
+let bookCollection = [];
 
-const form = document.getElementById('form');
+const submitButton = document.getElementById('submit');
+const booksContainer = document.getElementById('books-container');
 
-function addBook(event) {
-  // get title and author from user input
-  const title = document.getElementById('bookTitle').value;
-  const author = document.getElementById('bookAuthor').value;
- 
-  // this prevents browser default behavior
-  event.preventDefault();
+const addButton = (e) => {
+  e.preventDefault();
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
 
-  // initialize and add new book to collection
+  // add new book to bookCollection
   const newBook = new Book(title, author);
   bookCollection.push(newBook);
 
-  // sets local storage
+  // add book object to local storage
+  localStorage.setItem('books', JSON.stringify(bookCollection));
+  // create new book in the dom
+  const bookCard = document.createElement('div');
 
+  const h2 = document.createElement('h2');
+  h2.innerText = title;
+  bookCard.append(h2);
 
-  // target book collection and populate page with available books
-  let buildHTML = '';
-  for (let i = 0; i < bookCollection.length; i += 1) {
-    buildHTML += `
-      <div>
-        <h2 >${bookCollection[i].title}</h2>
-        <h3>${bookCollection[i].author}</h3>
-        <button type="button" onclick="removeBtn(${i})">Remove</button>
-        <p>${i}</p>
-        <hr />
-      </div>
-    `;
-  }
-  // sets booksContainer to buildHTML
-  booksContainer.innerHTML = buildHTML;
-  // cleans the DOM
-  document.getElementById('bookTitle').value = '';
-  document.getElementById('bookAuthor').value = '';
-}
+  const h3 = document.createElement('h3');
+  h3.innerText = author;
+  bookCard.append(h3);
 
-function removeBtn(t) {
-  (bookCollection.splice(t, t));
-  console.log(bookCollection);
-}
-form.addEventListener('submit', addBook);
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Remove';
+  bookCard.append(deleteButton);
+
+  booksContainer.append(bookCard);
+
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+
+  deleteButton.addEventListener('click', () => {
+    bookCard.remove();
+    bookCollection = bookCollection.filter((element) => element !== newBook);
+    localStorage.setItem('books', JSON.stringify(bookCollection));
+  });
+};
+
+submitButton.addEventListener('click', addButton);
