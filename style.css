@@ -1,10 +1,59 @@
 
+.main {
+  width: 500px;
+  margin: 100px auto 0 auto;
+}
+
+h1 {
+  margin-left: 100px;
+}
+
 input {
   display: block;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.main {
-  margin-left: 150px;
+.bookCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 40px;
+}
+
+.bookInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#seperator {
+  margin: 0;
+  height: 1px;
+  background: black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#books-container {
+  width: 500px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#submit {
+  display: flex;
 }
