@@ -52,3 +52,4 @@ class Book {
 }
 
 submitButton.addEventListener('click', Book.addButton);
+
