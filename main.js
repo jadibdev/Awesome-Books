@@ -106,7 +106,6 @@ if (storage.length > 0) {
     /* REMOVE FUNCTION */
     const removeButton = () => {
       bookCard.remove();
-      bookCollection = bookCollection.filter((element) => element !== newBook);
       localStorage.setItem('books', JSON.stringify(bookCollection));
       seperator.parentNode.removeChild(seperator);
     };
@@ -126,7 +125,6 @@ addNew.addEventListener('click', () => {
   addNew.style.color = 'grey';
   ButtonContact.style.color = 'black';
   BookList.style.color = 'black';
-
 });
 
 ButtonContact.addEventListener('click', () => {

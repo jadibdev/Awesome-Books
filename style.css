@@ -2,6 +2,7 @@ body {
   margin-left: 20px;
   margin-right: 20px;
 }
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -54,6 +55,7 @@ input {
 .bookCard:nth-of-type(odd) {
   background-color: rgb(214, 214, 214);
 }
+
 #seperator {
   margin: 0;
   height: 1px;
@@ -89,6 +91,20 @@ form {
   display: flex;
 }
 
+.nav-list li a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+.nav-list li {
+  display: grid;
+  align-items: center;
+  height: 40px;
+  border-right: 4px solid black;
+  padding-right: 30px;
+}
+
 .contact {
   display: flex;
   justify-content: center;
@@ -96,9 +112,11 @@ form {
   align-items: center;
   margin-top: 25px;
 }
+
 .contact p {
   font-size: 24px;
 }
+
 .contact ul li {
   font-size: 24px;
 }
@@ -107,25 +125,14 @@ form {
   display: none;
 }
 
-.nav-list li a {
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
-}
-.nav-list li {
-  display: grid;
-  align-items: center;
-  height: 40px;
-    border-right: 4px solid black;
-  padding-right: 30px;
-}
 .contact-li {
   border: none !important;
 }
+
 .footer {
-    border: 5px solid black;
-    position: absolute;
-    bottom: 0;
-    width: 96%;
-    padding-left: 20px;
+  border: 5px solid black;
+  position: absolute;
+  bottom: 0;
+  width: 96%;
+  padding-left: 20px;
 }
