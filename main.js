@@ -106,6 +106,7 @@ if (storage.length > 0) {
     /* REMOVE FUNCTION */
     const removeButton = () => {
       bookCard.remove();
+      bookCollection = bookCollection.filter((element) => element !== newBook);
       localStorage.setItem('books', JSON.stringify(bookCollection));
       seperator.parentNode.removeChild(seperator);
     };
@@ -122,16 +123,26 @@ addNew.addEventListener('click', () => {
   bookContainer.classList.add('disappear');
   contact.classList.add('disappear');
   formContainer.classList.remove('disappear');
+  addNew.style.color = 'grey';
+  ButtonContact.style.color = 'black';
+  BookList.style.color = 'black';
+
 });
 
 ButtonContact.addEventListener('click', () => {
   bookContainer.classList.add('disappear');
   contact.classList.remove('disappear');
   formContainer.classList.add('disappear');
+  addNew.style.color = 'black';
+  ButtonContact.style.color = 'grey';
+  BookList.style.color = 'black';
 });
 
 BookList.addEventListener('click', () => {
   bookContainer.classList.remove('disappear');
   contact.classList.add('disappear');
   formContainer.classList.add('disappear');
+  addNew.style.color = 'black';
+  ButtonContact.style.color = 'black';
+  BookList.style.color = 'grey';
 });
