@@ -35,7 +35,7 @@ class Book {
     bookInfo.append(h2);
 
     const h4 = document.createElement('h4');
-    h4.innerText = author;
+    h4.innerText = `by ${author}`;
     bookInfo.append(h4);
 
     bookCard.append(bookInfo);
@@ -77,7 +77,7 @@ for (let i = 0; i < storage.length; i += 1) {
   bookInfo.append(h2);
 
   const h4 = document.createElement('h4');
-  h4.innerText = storage[i].author;
+  h4.innerText = `by ${storage[i].author}`;
   bookInfo.append(h4);
 
   bookCard.append(bookInfo);

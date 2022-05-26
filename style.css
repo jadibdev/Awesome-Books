@@ -1,3 +1,17 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 150px;
+  padding-left: 150px;
+  background: lightgray;
+}
+
+.nav ul {
+  display: flex;
+  gap: 30px;
+  list-style-type: none;
+}
+
 
 .main {
   width: 500px;
@@ -23,6 +37,7 @@ input {
   padding-left: 10px;
   padding-right: 10px;
   height: 40px;
+  margin-top: 20px;
 }
 
 .bookInfo {
@@ -37,17 +52,20 @@ input {
   background: black;
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 20px;;
 }
 
 #books-container {
   width: 500px;
   border-radius: 10px;
   margin-bottom: 10px;
+  margin-top: 50px;
 }
 
 .formContainer {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 form {
