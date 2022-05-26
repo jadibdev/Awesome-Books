@@ -11,17 +11,18 @@
   <nav class="nav">
     <p>Awesome Books</p>
     <ul>
-      <li>Book List</li>
-      <li>Add New</li>
-      <li>Contact</li>
+      <li id="book_list"><a href="#">Book List</a></li>
+      <li id="add_new"><a href="#" >Add New</a></li>
+      <li id="contact"><a href="#">Contact</a></li>
     </ul>
   </nav>
   <div class="main">
     <h1>All Awesome Books</h1>
     <div id="books-container">
-
+      
     </div>
-    <div class="formContainer">
+    <div class="formContainer disappear">
+      <h2>Add new Book</h2>
       <form>
         <input type="text" id="title" placeholder="title" required>
         <input type="text" id="author" placeholder="author" required>
@@ -29,6 +30,17 @@
       </form>
     </div>
   </div>
+
+  <div class="contact disappear">
+    <h1>Contact Information</h1>
+    <p>Do have any question or you just want to say "Hello"? <br> You can reach out to us!</p>
+    <ul>
+      <li>Our e-mail: mail@mail.com</li>
+      <li>Our phone number: 0043586534422</li>
+      <li>Our Address: Streetname 22, 84503 City, Country</li>
+    </ul>
+  </div>
+
 
   <script src="main.js"></script>
 </body>
