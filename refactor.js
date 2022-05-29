@@ -12,6 +12,25 @@ const addNew = document.querySelector('#add_new');
 const ButtonContact = document.querySelector('#contact');
 const BookList = document.querySelector('#book_list');
 
+const makeaddButtonTemplate = (title, author, index) => {
+  let buildHtml = '';
+  buildHtml += `
+  <div class="bookCard" id=${index}>
+    <div class="bookInfo">
+      <h2>${title}</h2>
+      <h4>by ${author}</h4>
+    </div>
+    <button>Remove</button>
+  </div>
+  `;
+  /*
+   BUG: ----------------------------------------
+    using innerHTML is still proving to be a major bottleneck
+  */
+  booksContainer.innerHTML = buildHtml;
+  bookContainer.classList.remove('disappear');
+};
+
 /* BOOK CLASS */
 class Book {
   constructor(title, author, index) {
@@ -22,57 +41,36 @@ class Book {
 
   static addButton(e) {
     e.preventDefault();
+
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const index = Math.random() * 10;
+
     const newBook = new Book(title, author, index);
 
+    // add new book to the dom
+    const newTemplate = makeaddButtonTemplate(newBook.title, newBook.author, newBook.index);
+    booksContainer.append(newTemplate);
+    // add new book to book collection
     bookCollection.push(newBook);
-
-    // add book object to local storage
+    // add new book to local storage
     localStorage.setItem('books', JSON.stringify(bookCollection));
 
-    // create new book in the dom
-    const bookCard = document.createElement('div');
-    const bookInfo = document.createElement('div');
-    bookInfo.classList.add('bookInfo');
-    bookCard.classList.add('bookCard');
-    bookCard.id = `${newBook.index}`;
-    const magicId = `${newBook.index}`;
-
     bookContainer.classList.remove('disappear');
-
-    const h2 = document.createElement('h2');
-    h2.innerText = title;
-    bookInfo.append(h2);
-
-    const h4 = document.createElement('h4');
-    h4.innerText = `by ${author}`;
-    bookInfo.append(h4);
-
-    bookCard.append(bookInfo);
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Remove';
-    bookCard.append(deleteButton);
-
-    const seperator = document.createElement('hr');
-    seperator.id = 'seperator';
-
-    booksContainer.append(bookCard);
-    booksContainer.append(seperator);
+    // clear the inputs
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
 
     /* REMOVE FUNCTION */
     function remove() {
-      document.getElementById(`${magicId}`).remove();
+      const bookCard = document.getElementById(`${newBook.index}`)
+      bookCard.remove();
       bookCollection = bookCollection.filter((element) => element !== newBook);
       localStorage.setItem('books', JSON.stringify(bookCollection));
-      seperator.parentNode.removeChild(seperator);
+      // seperator.parentNode.removeChild(seperator);
     }
 
-    document.getElementById(`${magicId}`).addEventListener('click', remove);
+    document.getElementById(`${newBook.index}`).addEventListener('click', remove);
   }
 }
 
@@ -107,6 +105,7 @@ if (storage.length > 0) {
 
     booksContainer.append(bookCard);
     booksContainer.append(seperator);
+
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
 
