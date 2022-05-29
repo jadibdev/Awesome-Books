@@ -67,7 +67,7 @@ class Book {
 
     /* REMOVE FUNCTION */
     function remove() {
-      const bookCard = document.getElementById(`${newBook.index}`)
+      const bookCard = document.getElementById(`${newBook.index}`);
       bookCard.remove();
       bookCollection = bookCollection.filter((element) => element !== newBook);
       localStorage.setItem('books', JSON.stringify(bookCollection));
