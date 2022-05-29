@@ -1,7 +1,3 @@
-* {
-  border: 1px solid red;
-}
-
 .nav {
   display: flex;
   justify-content: space-between;
