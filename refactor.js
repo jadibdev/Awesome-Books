@@ -13,26 +13,36 @@ const ButtonContact = document.querySelector('#contact');
 const BookList = document.querySelector('#book_list');
 
 const makeaddButtonTemplate = (title, author, index) => {
-  let buildHtml = '';
-  buildHtml += `
-  <div class="bookCard" id=${index}>
-    <div class="bookInfo">
-      <h2>${title}</h2>
-      <h4>by ${author}</h4>
-    </div>
-    <button>Remove</button>
-  </div>
-  `;
-  /*
-   BUG: ----------------------------------------
-    using innerHTML is still proving to be a major bottleneck
+  const bookCard = document.createElement('div');
+  const bookInfo = document.createElement('div');
+  bookInfo.classList.add('bookInfo');
+  bookCard.classList.add('bookCard');
+  bookCard.id = `${index}`;
 
-  Potential solution:
-    rewrite the makeaddButtonTemplate function
-    to build the html template using createElement()
-  */
-  booksContainer.innerHTML = buildHtml;
   bookContainer.classList.remove('disappear');
+
+  const h2 = document.createElement('h2');
+  h2.innerText = title;
+  bookInfo.append(h2);
+
+  const h4 = document.createElement('h4');
+  h4.innerText = `by ${author}`;
+  bookInfo.append(h4);
+
+  bookCard.append(bookInfo);
+
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Remove';
+  bookCard.append(deleteButton);
+
+  booksContainer.append(bookCard);
+
+  const seperator = document.createElement('hr');
+  seperator.id = 'seperator';
+  booksContainer.append(seperator);
+
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
 };
 
 /* BOOK CLASS */
@@ -53,9 +63,8 @@ class Book {
     const newBook = new Book(title, author, index);
 
     // add new book to the dom
-    const newTemplate = makeaddButtonTemplate(newBook.title, newBook.author, newBook.index);
-    booksContainer.append(newTemplate);
-    // add new book to book collection
+    makeaddButtonTemplate(newBook.title, newBook.author, newBook.index);
+
     bookCollection.push(newBook);
     // add new book to local storage
     localStorage.setItem('books', JSON.stringify(bookCollection));
@@ -67,11 +76,13 @@ class Book {
 
     /* REMOVE FUNCTION */
     function remove() {
+      const seperator = document.getElementById('seperator');
       const bookCard = document.getElementById(`${newBook.index}`);
       bookCard.remove();
+      seperator.remove();
+      // seperator.parentNode.removeChild(seperator);
       bookCollection = bookCollection.filter((element) => element !== newBook);
       localStorage.setItem('books', JSON.stringify(bookCollection));
-      // seperator.parentNode.removeChild(seperator);
     }
 
     document.getElementById(`${newBook.index}`).addEventListener('click', remove);
@@ -85,42 +96,19 @@ populate page on initial load from local storage
 storage = JSON.parse(localStorage.getItem('books')) || [];
 if (storage.length > 0) {
   for (let i = 0; i < storage.length; i += 1) {
-    const bookCard = document.createElement('div');
-    const bookInfo = document.createElement('div');
-    bookInfo.classList.add('bookInfo');
-    bookCard.classList.add('bookCard');
-
-    const h2 = document.createElement('h2');
-    h2.innerText = storage[i].title;
-    bookInfo.append(h2);
-
-    const h4 = document.createElement('h4');
-    h4.innerText = `by ${storage[i].author}`;
-    bookInfo.append(h4);
-
-    bookCard.append(bookInfo);
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Remove';
-    bookCard.append(deleteButton);
-
-    const seperator = document.createElement('hr');
-    seperator.id = 'seperator';
-
-    booksContainer.append(bookCard);
-    booksContainer.append(seperator);
-
-    document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
+    makeaddButtonTemplate(storage[i].title, storage[i].author, storage[i].index);
 
     /* REMOVE FUNCTION */
     const removeButton = () => {
+      const seperator = document.getElementById('seperator');
+      const bookCard = document.getElementById(`${storage[i].index}`);
       bookCard.remove();
+      seperator.remove();
+      // seperator.parentNode.removeChild(seperator);
       localStorage.setItem('books', JSON.stringify(bookCollection));
-      seperator.parentNode.removeChild(seperator);
     };
 
-    deleteButton.addEventListener('click', removeButton);
+    document.getElementById(`${storage[i].index}`).addEventListener('click', removeButton);
   }
 } else {
   formContainer.classList.remove('disappear');
@@ -128,6 +116,7 @@ if (storage.length > 0) {
 
 submitButton.addEventListener('click', Book.addButton);
 
+// Event listeners for toggling list, add, contact sections
 addNew.addEventListener('click', () => {
   bookContainer.classList.add('disappear');
   contact.classList.add('disappear');
