@@ -26,6 +26,10 @@ const makeaddButtonTemplate = (title, author, index) => {
   /*
    BUG: ----------------------------------------
     using innerHTML is still proving to be a major bottleneck
+
+  Potential solution:
+    rewrite the makeaddButtonTemplate function
+    to build the html template using createElement()
   */
   booksContainer.innerHTML = buildHtml;
   bookContainer.classList.remove('disappear');
