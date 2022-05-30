@@ -1,10 +1,20 @@
+body {
+  margin: 0;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
   padding-right: 20px;
   padding-left: 20px;
-  border: 3px solid black;
-  width: 100%;
+  background: lightgrey;
+}
+
+#dateTime {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  color: grey;
 }
 
 .nav ul {
@@ -13,9 +23,14 @@
   list-style-type: none;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .main {
   width: 500px;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
 }
 
 h1 {
@@ -90,4 +105,15 @@ form {
 
 .disappear {
   display: none;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: lightgrey;
+  color: black;
+  text-align: center;
+  margin-right: 5px;
 }
