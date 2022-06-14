@@ -3,9 +3,9 @@ This is a project showcasing a book app that enables the user to add their favor
 
 ## Built With
 
-- HTML
-- CSS
 - JAVASCRIPT
+- CSS
+- Local Storage
 
 ## Getting Started
 
