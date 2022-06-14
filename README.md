@@ -1,5 +1,5 @@
 ## Description
-This is a project showcasing a book app that enables the user to add their favorite books to a list, the app takes advantage of the browser local storage to persist data when the page reloads.
+This is a project showcasing a book app that enables the user to add their favorite books to a list, update as well as delete them, the app takes advantage of the browser local storage to persist data when the page reloads and uses CSS for styling.
 
 ## Built With
 
